@@ -1,0 +1,8 @@
+FROM python:{{ .FromVersion }}
+
+LABEL maintainer="Julien Klaer"
+
+RUN pip install poetry=={{ .PoetryVersion }} && \
+    poetry config virtualenvs.in-project true
+
+CMD ["poetry", "--version"]
