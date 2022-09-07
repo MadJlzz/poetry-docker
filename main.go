@@ -5,9 +5,13 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"text/template"
 )
 
-const ConfigurationFilepath = "configuration.json"
+const (
+	ConfigurationFilepath  = "configuration.json"
+	DockerTemplateFilepath = "Dockerfile.gotmpl"
+)
 
 // PlatformVersions struct which contains
 // an array of platforms.
@@ -58,5 +62,15 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Println(platformVersions)
+
+	tmpl, err := template.New(DockerTemplateFilepath).ParseFiles(DockerTemplateFilepath)
+	if err != nil {
+		panic(err)
+	}
+	err = tmpl.Execute(os.Stdout, map[string]string{"FromVersion": "3.10.6-bullseye", "PoetryVersion": "1.2.0"})
+	if err != nil {
+		panic(err)
+	}
 }
