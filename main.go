@@ -100,10 +100,10 @@ func generateDockerfilesFrom(tmpl *template.Template, platform Platform, pairs [
 			fmt.Printf("an error occured while trying to create Dockerfile for platform [%s] and image [%s]",
 				platform.Version, image)
 		}
-		err = tmpl.Execute(f, map[string]string{"FromVersion": image.GetDockerfileNotation(), "PoetryVersion": platform.Version})
+		err = tmpl.Execute(f, map[string]string{"FromVersion": image.GetDockerfileNotation(), "PoetryVersion": platform.Version, "ImageVariant": image.ImageVariant})
 		if err != nil {
-			fmt.Printf("an error occured while trying to generate Dockerfile content for platform [%s] and image [%s]",
-				platform.Version, image)
+			fmt.Printf("an error occured while trying to generate Dockerfile content for platform [%s] and image [%s].\ngot: %s\n",
+				platform.Version, image, err)
 		}
 		if err = f.Close(); err != nil {
 			fmt.Printf("couldn't close file for platform [%s] and image [%s]",
