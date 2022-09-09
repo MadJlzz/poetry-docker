@@ -1,3 +1,5 @@
+# This Dockerfile was generated.
+# Do not manually update this file; changes will be lost.
 FROM python:3.9.13-bullseye
 
 LABEL maintainer="Julien Klaer"
