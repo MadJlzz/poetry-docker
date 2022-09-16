@@ -31,9 +31,9 @@ func TestUnmarshalConfigurationOk(t *testing.T) {
 	assert.Nil(t, err, "no error should be returned when configuration reading succeed. got %s", err)
 	assert.NotEmptyf(t, platformVersions, "struct should be filled with informations.")
 
-	assert.NotEmpty(t, platformVersions.Poetry120.PythonVersions)
-	assert.NotEmpty(t, platformVersions.Poetry120.ImageVariants)
-	assert.Equal(t, platformVersions.Poetry120.Version, "1.2.0")
+	assert.NotEmpty(t, platformVersions.Poetry12.PythonVersions)
+	assert.NotEmpty(t, platformVersions.Poetry12.ImageVariants)
+	assert.Equal(t, platformVersions.Poetry12.Version, "1.2.1")
 }
 
 func TestUnmarshalConfigurationJSONSyntaxError(t *testing.T) {
@@ -44,8 +44,8 @@ func TestUnmarshalConfigurationJSONSyntaxError(t *testing.T) {
 
 func TestPlatforms_GetPlatforms(t *testing.T) {
 	platforms := Platforms{
-		Poetry120:  Platform{},
-		Poetry1115: Platform{},
+		Poetry12: Platform{},
+		Poetry11: Platform{},
 	}
 	assert.Equal(t, 2, len(platforms.GetPlatforms()))
 }
@@ -74,7 +74,7 @@ func TestGetWritingPathFromGeneratesFilepath(t *testing.T) {
 		ImageVariant:  "bullseye",
 	}
 	r := getWritingPathFrom(platform, pair)
-	assert.Equal(t, filepath.Join(basepath, platform.Version, pair.PythonVersion, pair.ImageVariant, "Dockerfile"), r)
+	assert.Equal(t, filepath.Join(basepath, "1.0", pair.PythonVersion, pair.ImageVariant, "Dockerfile"), r)
 }
 
 func TestGetImagesFromPythonVersionsAndImageVariants(t *testing.T) {
