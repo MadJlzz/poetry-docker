@@ -33,7 +33,7 @@ jobs:
         env:
           DOCKER_USERNAME: madjlzz
           IMAGE_DOCKERFILE: ${{ env.POETRY_SHORT_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
-          IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_VERSION}}
+          IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_LONG_VERSION}}
           IMAGE_TAG: ${{ matrix.PYTHON_VERSION }}-${{ matrix.IMAGE_VARIANT }}
         run: |
           docker build . --file ${IMAGE_DOCKERFILE} --tag ${IMAGE_NAME}:${IMAGE_TAG}
@@ -62,7 +62,7 @@ jobs:
         env:
           DOCKER_USERNAME: madjlzz
           IMAGE_DOCKERFILE: ${{ env.POETRY_SHORT_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
-          IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_VERSION}}
+          IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_LONG_VERSION}}
           IMAGE_TAG: ${{ matrix.PYTHON_VERSION }}-${{ matrix.IMAGE_VARIANT }}
         run: |
           docker build . --file ${IMAGE_DOCKERFILE} --tag ${IMAGE_NAME}:${IMAGE_TAG}
