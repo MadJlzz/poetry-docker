@@ -16,7 +16,8 @@ jobs:
     name: Build Docker images for Poetry 1.2.0
     runs-on: ubuntu-latest
     env:
-      POETRY_VERSION: 1.2.0
+      POETRY_SHORT_VERSION: 1.2
+      POETRY_LONG_VERSION: 1.2.1
 
     strategy:
       fail-fast: false
@@ -31,7 +32,7 @@ jobs:
       - name: Build an push the Docker image
         env:
           DOCKER_USERNAME: madjlzz
-          IMAGE_DOCKERFILE: ${{ env.POETRY_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
+          IMAGE_DOCKERFILE: ${{ env.POETRY_SHORT_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
           IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_VERSION}}
           IMAGE_TAG: ${{ matrix.PYTHON_VERSION }}-${{ matrix.IMAGE_VARIANT }}
         run: |
@@ -44,7 +45,8 @@ jobs:
     name: Build Docker images for Poetry 1.1.15
     runs-on: ubuntu-latest
     env:
-      POETRY_VERSION: 1.1.15
+      POETRY_SHORT_VERSION: 1.1
+      POETRY_LONG_VERSION: 1.1.15
 
     strategy:
       fail-fast: false
@@ -59,7 +61,7 @@ jobs:
       - name: Build an push the Docker image
         env:
           DOCKER_USERNAME: madjlzz
-          IMAGE_DOCKERFILE: ${{ env.POETRY_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
+          IMAGE_DOCKERFILE: ${{ env.POETRY_SHORT_VERSION}}/${{ matrix.PYTHON_VERSION }}/${{ matrix.IMAGE_VARIANT }}/Dockerfile
           IMAGE_NAME: ${{ env.DOCKER_BASE_IMAGE_NAME }}-${{ env.POETRY_VERSION}}
           IMAGE_TAG: ${{ matrix.PYTHON_VERSION }}-${{ matrix.IMAGE_VARIANT }}
         run: |
