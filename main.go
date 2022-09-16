@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"text/template"
 )
 
@@ -23,14 +24,14 @@ var (
 // Platforms struct which contains
 // an array of platforms.
 type Platforms struct {
-	Poetry120  Platform `json:"1.2.0"`
-	Poetry1115 Platform `json:"1.1.15"`
+	Poetry12 Platform `json:"1.2"`
+	Poetry11 Platform `json:"1.1"`
 }
 
 func (p *Platforms) GetPlatforms() []Platform {
 	return []Platform{
-		p.Poetry120,
-		p.Poetry1115,
+		p.Poetry12,
+		p.Poetry11,
 	}
 }
 
@@ -89,7 +90,8 @@ func getImageNamesFrom(pythonVersions []string, imageVariants []string) []python
 }
 
 func getWritingPathFrom(platform Platform, pair pythonImageVariant) string {
-	return fmt.Sprintf("%s/%s/%s/%s/Dockerfile", basepath, platform.Version, pair.PythonVersion, pair.ImageVariant)
+	patchIndex := strings.LastIndex(platform.Version, ".")
+	return fmt.Sprintf("%s/%s/%s/%s/Dockerfile", basepath, platform.Version[:patchIndex], pair.PythonVersion, pair.ImageVariant)
 }
 
 func generateDockerfilesFrom(tmpl *template.Template, platform Platform, pairs []pythonImageVariant) {
